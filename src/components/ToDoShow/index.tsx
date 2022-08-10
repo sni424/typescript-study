@@ -5,8 +5,19 @@ import { IToDo, toDoState } from "../../atoms";
 const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
     const setTodos = useSetRecoilState(toDoState);
 
-    const onClick = (newCate: IToDo["category"]) => {
-        console.log(newCate);
+    const onClick = (
+        newCate: IToDo["category"],
+        e: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        setTodos((oldToDos) => {
+            const targetIndex = oldToDos.findIndex((data) => data.id === id);
+            const newToDo = { userid, id, email, category: newCate, password };
+            return [
+                ...oldToDos.slice(0, targetIndex),
+                newToDo,
+                ...oldToDos.slice(targetIndex + 1),
+            ];
+        });
     };
 
     return (
@@ -17,13 +28,13 @@ const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
             id : {userid} / email : {email} / category : {category}
             <div style={{ marginLeft: "10px" }}>
                 {category !== "Doing" && (
-                    <button onClick={() => onClick("Doing")}>Doing</button>
+                    <button onClick={(e) => onClick("Doing", e)}>Doing</button>
                 )}
                 {category !== "To-Do" && (
-                    <button onClick={() => onClick("To-Do")}>To-Do</button>
+                    <button onClick={(e) => onClick("To-Do", e)}>To-Do</button>
                 )}
                 {category !== "Done" && (
-                    <button onClick={() => onClick("Done")}>Done</button>
+                    <button onClick={(e) => onClick("Done", e)}>Done</button>
                 )}
             </div>
         </li>
