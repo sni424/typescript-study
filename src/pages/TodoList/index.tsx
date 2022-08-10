@@ -1,35 +1,39 @@
-import { useRecoilValue } from "recoil";
-import { toDoSelector, toDoState } from "../../atoms";
+import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { categoryState, toDoSelector, toDoState } from "../../atoms";
 import CreateToDo from "../../components/CreateToDo";
 import ToDoShow from "../../components/ToDoShow";
 
 const TodoList = () => {
     const toDos = useRecoilValue(toDoState);
-    const [toDo, doing, done] = useRecoilValue(toDoSelector);
+    const newToDos = useRecoilValue(toDoSelector);
+    const [category, setCategory] = useRecoilState(categoryState);
 
+    const onChange = (e: React.FormEvent<HTMLSelectElement>) => {
+        setCategory(e.currentTarget.value);
+    };
     return (
         <div>
             <h1>Todo List</h1>
             <hr />
             <CreateToDo />
-            <h1>To Do</h1>
+            <select
+                value={category}
+                onChange={(e) => onChange(e)}
+                style={{ marginTop: "10px" }}
+            >
+                <option value="All">All</option>
+                <option value="To-Do">ToDo</option>
+                <option value="Doing">Doing</option>
+                <option value="Done">Done</option>
+            </select>
             <ul>
-                {toDo?.map((data) => {
-                    return <ToDoShow {...data} />;
-                })}
-            </ul>
-            <hr />
-            <h1>Doing</h1>
-            <ul>
-                {doing?.map((data) => {
-                    return <ToDoShow {...data} />;
-                })}
-            </ul>
-            <hr />
-            <h1>Done</h1>
-            <ul>
-                {done?.map((data) => {
-                    return <ToDoShow {...data} />;
+                {category === "All" &&
+                    toDos?.map((data) => {
+                        return <ToDoShow key={data.id} {...data} />;
+                    })}
+                {newToDos?.map((data) => {
+                    return <ToDoShow key={data.id} {...data} />;
                 })}
             </ul>
             <hr />
