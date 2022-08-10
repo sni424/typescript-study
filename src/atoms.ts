@@ -7,7 +7,12 @@ export interface IToDo {
     category: "Done" | "Doing" | "To-Do";
     id: number;
 }
-export const categoryState = atom({
+export const categoryStateNotAll = atom<"Done" | "Doing" | "To-Do">({
+    key: "category",
+    default: "To-Do",
+});
+
+export const categoryState = atom<"Done" | "Doing" | "To-Do" | "All">({
     key: "category",
     default: "To-Do",
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
-import { toDoState } from "../../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryState, categoryStateNotAll, toDoState } from "../../atoms";
 
 interface IUseForm {
     errors: {
@@ -26,6 +26,7 @@ interface IUseForm {
 
 const CreateToDo = () => {
     const setToDos = useSetRecoilState(toDoState);
+    const category = useRecoilValue(categoryStateNotAll);
 
     const {
         register,
@@ -51,7 +52,7 @@ const CreateToDo = () => {
                 email: data.email,
                 password: data.passwordCheck,
                 id: Date.now(),
-                category: "To-Do",
+                category,
             },
             ...prev,
         ]);
