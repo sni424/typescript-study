@@ -10,7 +10,7 @@ const TodoList = () => {
     const [category, setCategory] = useRecoilState(categoryState);
 
     const onChange = (e: React.FormEvent<HTMLSelectElement>) => {
-        setCategory(e.currentTarget.value);
+        setCategory(e.currentTarget.value as any);
     };
     return (
         <div>
