@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import Main from "./pages/Main";
 import TodoList from "./pages/TodoList";
 import { darkTheme } from "./utils/theme";
+import AtomSet from "./pages/AtomSet";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path="/todo" element={<TodoList />} />
+                    <Route path="/atom" element={<AtomSet />} />
                 </Routes>
             </ThemeProvider>
         </>
