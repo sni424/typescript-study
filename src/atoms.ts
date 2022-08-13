@@ -48,7 +48,15 @@ export const hourSelector = selector<number>({
     },
 });
 
-export const toDosState = atom({
+interface ITodoState {
+    [key: string]: string[];
+}
+
+export const toDosState = atom<ITodoState>({
     key: "dragTodo",
-    default: ["a", "b", "c", "d", "e", "f"],
+    default: {
+        to_do: ["a", "b", "c"],
+        dogin: ["d", "e"],
+        done: ["f"],
+    },
 });
