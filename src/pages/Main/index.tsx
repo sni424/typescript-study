@@ -24,16 +24,22 @@ const Boards = styled.div`
 const Main = () => {
     const [toDos, setToDos] = useRecoilState(toDosState);
 
-    const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
-        if (!destination) return;
-        // setToDos((oldToDos) => {
-        //     const newToDos = [...oldToDos?.to_do];
-        //     //해당 인덱스 삭제
-        //     newToDos.splice(source.index, 1);
-        //     //해당부분에 추가
-        //     newToDos.splice(destination?.index, 0, draggableId);
-        //     return newToDos;
-        // });
+    const onDragEnd = (info: DropResult) => {
+        const { destination, draggableId, source } = info;
+        if (destination?.droppableId === source?.droppableId) {
+            //같은 board안에서만 움직인다면
+            setToDos((allBoards) => {
+                const boardCopy = [...allBoards[source.droppableId]];
+                //해당 인덱스 삭제
+                boardCopy.splice(source.index, 1);
+                //해당부분에 추가
+                boardCopy.splice(destination?.index, 0, draggableId);
+                return {
+                    ...allBoards,
+                    [source.droppableId]: boardCopy,
+                };
+            });
+        }
     };
 
     return (
