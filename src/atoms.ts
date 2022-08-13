@@ -47,3 +47,8 @@ export const hourSelector = selector<number>({
         set(minuteState, minutes);
     },
 });
+
+export const toDosState = atom({
+    key: "dragTodo",
+    default: ["a", "b", "c", "d", "e", "f"],
+});

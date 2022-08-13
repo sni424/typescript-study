@@ -7,6 +7,8 @@ declare module "styled-components" {
         bgColor: string;
         accentColor: string;
         boxDiv: string;
+        cardColor?: string;
+        boardColor?: string;
     }
 }
 declare module "react-query/types/react/QueryClientProvider" {
