@@ -32,4 +32,4 @@ const DragabbleCard = ({ todo, i }: IDragTodo) => {
     );
 };
 
-export default DragabbleCard;
+export default React.memo(DragabbleCard);
