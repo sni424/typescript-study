@@ -55,8 +55,8 @@ interface ITodoState {
 export const toDosState = atom<ITodoState>({
     key: "dragTodo",
     default: {
-        to_do: ["a", "b", "c"],
-        dogin: ["d", "e"],
-        done: ["f"],
+        To_Do: ["a", "b", "c"],
+        Dogin: ["d", "e"],
+        Done: ["f"],
     },
 });
