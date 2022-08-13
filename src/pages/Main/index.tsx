@@ -30,7 +30,6 @@ const Main = () => {
         if (destination?.droppableId === source?.droppableId) {
             //같은 board안에서만 움직인다면
             setToDos((allBoards) => {
-                console.log(allBoards);
                 const boardCopy = [...allBoards[source.droppableId]];
                 //해당 인덱스 삭제
                 boardCopy.splice(source.index, 1);
