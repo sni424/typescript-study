@@ -48,15 +48,20 @@ export const hourSelector = selector<number>({
     },
 });
 
+export interface ITodos {
+    id: number;
+    text: string;
+}
+
 interface ITodoState {
-    [key: string]: string[];
+    [key: string]: ITodos[];
 }
 
 export const toDosState = atom<ITodoState>({
     key: "dragTodo",
     default: {
-        To_Do: ["a", "b", "c"],
-        Doging: ["d", "e"],
-        Done: ["f"],
+        To_Do: [{ id: Date.now() + 1, text: "drogba" }],
+        Doging: [{ id: Date.now() + 2, text: "lampard" }],
+        Done: [{ id: Date.now() + 3, text: "silva" }],
     },
 });
