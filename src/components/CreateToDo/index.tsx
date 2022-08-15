@@ -1,32 +1,39 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from "styled-components";
 import { categoryState, categoryStateNotAll, toDoState } from "../../atoms";
+
+const FlexDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 interface IUseForm {
     errors: {
-        password: {
+        password?: {
             message: string;
         };
         value: {
             message: string;
         };
-        passwordCheck: {
+        passwordCheck?: {
             message: string;
         };
-        email: {
+        email?: {
             message: string;
         };
     };
     value: string;
-    password: string;
-    passwordCheck: string;
-    email: string;
+    password?: string;
+    passwordCheck?: string;
+    email?: string;
 }
 
 const CreateToDo = () => {
     const setToDos = useSetRecoilState(toDoState);
-    const category = useRecoilValue(categoryStateNotAll);
+    const category = useRecoilValue(categoryState);
 
     const {
         register,
@@ -49,8 +56,8 @@ const CreateToDo = () => {
         setToDos((prev) => [
             {
                 userid: data.value,
-                email: data.email,
-                password: data.passwordCheck,
+                // email: data.email,
+                // password: data.passwordCheck,
                 id: Date.now(),
                 category,
             },
@@ -79,7 +86,7 @@ const CreateToDo = () => {
                         <span>{errors?.value?.message}</span>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <input
                         {...register("password", {
                             required: true,
@@ -126,8 +133,10 @@ const CreateToDo = () => {
                     <div>
                         <span>{errors?.email?.message}</span>
                     </div>
-                </div>
-                <button>추가</button>
+                </div> */}
+                <FlexDiv>
+                    <button>추가</button>
+                </FlexDiv>
             </form>
         </div>
     );

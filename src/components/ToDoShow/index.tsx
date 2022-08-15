@@ -1,9 +1,11 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState } from "../../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { categoryStateNotAll, IToDo, toDoState } from "../../atoms";
 
-const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
+const ToDoShow = ({ userid, id, category }: IToDo) => {
     const setTodos = useSetRecoilState(toDoState);
+    const cateValue = useRecoilValue(categoryStateNotAll);
+    console.log(cateValue);
 
     const onClick = (
         newCate: IToDo["category"],
@@ -11,7 +13,7 @@ const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
     ) => {
         setTodos((oldToDos) => {
             const targetIndex = oldToDos.findIndex((data) => data.id === id);
-            const newToDo = { userid, id, email, category: newCate, password };
+            const newToDo = { userid, id, category: newCate };
             return [
                 ...oldToDos.slice(0, targetIndex),
                 newToDo,
@@ -24,9 +26,21 @@ const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
         <li
             style={{ display: "flex", marginTop: "10px", marginBottom: "10px" }}
         >
-            id : {userid} / email : {email} / category : {category}
+            id : {userid} / category : {category}
             <div style={{ marginLeft: "10px" }}>
-                {category !== "Doing" && (
+                {cateValue?.map((data) => {
+                    return (
+                        category !== data && (
+                            <button
+                                key={data}
+                                onClick={(e) => onClick(`${data}`, e)}
+                            >
+                                {data}
+                            </button>
+                        )
+                    );
+                })}
+                {/* {category !== "Doing" && (
                     <button onClick={(e) => onClick("Doing", e)}>Doing</button>
                 )}
                 {category !== "To-Do" && (
@@ -34,7 +48,7 @@ const ToDoShow = ({ userid, id, email, password, category }: IToDo) => {
                 )}
                 {category !== "Done" && (
                     <button onClick={(e) => onClick("Done", e)}>Done</button>
-                )}
+                )} */}
             </div>
         </li>
     );
