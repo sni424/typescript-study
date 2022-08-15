@@ -15,8 +15,8 @@ function App() {
             <ThemeProvider theme={darkTheme}>
                 <GlobalStyle />
                 <Routes>
-                    <Route path="/" element={<Main />} />
-                    <Route path="/todo" element={<TodoList />} />
+                    <Route path="/todo" element={<Main />} />
+                    <Route path="/" element={<TodoList />} />
                     <Route path="/atom" element={<AtomSet />} />
                 </Routes>
             </ThemeProvider>

@@ -1,18 +1,25 @@
+import { type } from "os";
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export interface IToDo {
     userid: string;
-    email: string;
-    password: string;
-    category: "Done" | "Doing" | "To-Do";
+    // email: string;
+    // password: string;
+    category: "Done" | "Doing" | "To-Do" | string;
     id: number;
 }
-export const categoryStateNotAll = atom<"Done" | "Doing" | "To-Do">({
-    key: "category",
-    default: "To-Do",
+
+type Storage = "Done" | "Doing" | "To-Do" | string;
+export const categoryStateNotAll = atom<Storage[]>({
+    key: "categorySet",
+    default: ["To-Do", "Doing", "Done"],
+    effects_UNSTABLE: [persistAtom],
 });
 
-export const categoryState = atom<"Done" | "Doing" | "To-Do" | "All">({
+export const categoryState = atom<Storage>({
     key: "category",
     default: "To-Do",
 });
@@ -20,6 +27,7 @@ export const categoryState = atom<"Done" | "Doing" | "To-Do" | "All">({
 export const toDoState = atom<IToDo[]>({
     key: "todo",
     default: [],
+    effects_UNSTABLE: [persistAtom],
 });
 
 export const toDoSelector = selector({
@@ -60,8 +68,9 @@ interface ITodoState {
 export const toDosState = atom<ITodoState>({
     key: "dragTodo",
     default: {
-        To_Do: [{ id: Date.now() + 1, text: "drogba" }],
-        Doging: [{ id: Date.now() + 2, text: "lampard" }],
-        Done: [{ id: Date.now() + 3, text: "silva" }],
+        To_Do: [{ id: Date.now() + 1, text: "ToDoList" }],
+        Doging: [{ id: Date.now() + 2, text: "DoingList" }],
+        Done: [{ id: Date.now() + 3, text: "DoneList" }],
     },
+    effects_UNSTABLE: [persistAtom],
 });
