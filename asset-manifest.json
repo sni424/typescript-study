@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/typescript-study/static/css/main.abd64e84.css",
+    "main.js": "/typescript-study/static/js/main.c070daff.js",
+    "index.html": "/typescript-study/index.html",
+    "main.abd64e84.css.map": "/typescript-study/static/css/main.abd64e84.css.map",
+    "main.c070daff.js.map": "/typescript-study/static/js/main.c070daff.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abd64e84.css",
+    "static/js/main.c070daff.js"
+  ]
+}
